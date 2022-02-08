@@ -25,11 +25,11 @@ int main(){
         sort(a.begin(), a.end());
         sort(b.begin(), b.end());
         cout << "Case #" << i + 1 << ": ";
-        for (int j{0}, a_ind{0}, b_ind{0}; j < n; j++){
+        for (int j{0}, a_ind{0}, b_ind{b.size()-1}; j < n; j++){
             if(s[j] == '1')
                 cout << a.at(a_ind++) << " ";
             else
-                cout << b.at(b_ind++) << " ";
+                cout << b.at(b_ind--) << " ";
         }
         cout << endl;
     }
