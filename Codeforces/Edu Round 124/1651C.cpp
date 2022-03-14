@@ -48,6 +48,63 @@
 //     }
 // }
 
+// #include <bits/stdc++.h>
+// #define ll long long int
+// #define loop(i,o,n,step) for(auto i{o}; i < n; i += step)
+// using namespace std;
+
+// int main(){
+//     int t{0};
+//     cin >> t;
+//     while(t--){
+//         int n;
+//         cin >> n;
+//         int a[n], b[n];
+//         loop(i, 0, n, 1) cin >> a[i];
+//         loop(i, 0, n, 1) cin >> b[i];
+//         ll cost1, cost2, cost3, cost4;
+//         int l{0}, m{0};
+//         cost1 = abs(a[0] - b[0]) + abs(a[n - 1] - b[0]);
+//         cost2 = abs(b[0] - a[0]) + abs(b[n - 1] - a[0]);
+//         cost3 = min(abs(a[0] - b[0]) + abs(a[n - 1] - b[n - 1]), abs(a[n - 1] - b[0]) + abs(a[0] - b[n - 1]));
+//         loop(i,1,n,1){
+//             if (abs(a[0] - b[i]) + abs(a[n - 1] - b[i]) < cost1){
+//                 cost1 = abs(a[0] - b[i]) + abs(a[n - 1] - b[i]);
+//                 l = i;
+//             }
+//             if (abs(b[0] - a[i]) + abs(b[n - 1] - a[i]) < cost2){
+//                 cost2 = abs(b[0] - a[i]) + abs(b[n - 1] - a[i]);
+//                 m = i;
+//             }
+//         }
+//         if(l == 0 && m == 0){
+//             cost1 -= abs(a[0] - b[0]);
+//         }
+//         if (l == n-1 && m == n-1){
+//             cost1 -= abs(a[n - 1] - b[n - 1]);
+//         }
+//         if (l == 0 && m == n - 1){
+//             cost1 -= abs(a[0] - b[n - 1]);
+//         }
+//         if (l == n - 1 && m == 0){
+//             cost1 -= abs(a[n - 1] - b[0]);
+//         }
+//         ll e{abs(b[1] - a[0])}, f{abs(b[1] - a[n - 1])}, g{abs(a[1] - b[0])}, h{abs(a[1] - b[n - 1])};
+//         loop(i, 0, n, 1){
+//             if(e > b[i] - a[0])
+//                 e = abs(b[i] - a[0]);
+//             if (f > b[i] - a[n - 1])
+//                 f = abs(b[i] - a[n - 1]);
+//             if (g > a[i] - b[0])
+//                 g = abs(a[i] - b[0]);
+//             if (h > a[i] - b[n - 1])
+//                 h = abs(a[i] - b[n - 1]);
+//         }
+//         cost4 = e + f + g + h;
+//         cout << min(cost4, min(cost3, cost1 + cost2)) << endl;
+//     }
+// }
+
 #include <bits/stdc++.h>
 #define ll long long int
 #define loop(i,o,n,step) for(auto i{o}; i < n; i += step)
@@ -57,50 +114,40 @@ int main(){
     int t{0};
     cin >> t;
     while(t--){
-        int n;
+        int n{0};
         cin >> n;
         int a[n], b[n];
         loop(i, 0, n, 1) cin >> a[i];
         loop(i, 0, n, 1) cin >> b[i];
-        ll cost1, cost2, cost3, cost4;
-        int l{0}, m{0};
-        cost1 = abs(a[0] - b[0]) + abs(a[n - 1] - b[0]);
-        cost2 = abs(b[0] - a[0]) + abs(b[n - 1] - a[0]);
-        cost3 = min(abs(a[0] - b[0]) + abs(a[n - 1] - b[n - 1]), abs(a[n - 1] - b[0]) + abs(a[0] - b[n - 1]));
-        loop(i,1,n,1){
-            if (abs(a[0] - b[i]) + abs(a[n - 1] - b[i]) < cost1){
-                cost1 = abs(a[0] - b[i]) + abs(a[n - 1] - b[i]);
-                l = i;
-            }
-            if (abs(b[0] - a[i]) + abs(b[n - 1] - a[i]) < cost2){
-                cost2 = abs(b[0] - a[i]) + abs(b[n - 1] - a[i]);
-                m = i;
-            }
-        }
-        if(l == 0 && m == 0){
-            cost1 -= abs(a[0] - b[0]);
-        }
-        if (l == n-1 && m == n-1){
-            cost1 -= abs(a[n - 1] - b[n - 1]);
-        }
-        if (l == 0 && m == n - 1){
-            cost1 -= abs(a[0] - b[n - 1]);
-        }
-        if (l == n - 1 && m == 0){
-            cost1 -= abs(a[n - 1] - b[0]);
-        }
+        int r{0}, s{0}, t{0}, u{0};
         ll e{abs(b[1] - a[0])}, f{abs(b[1] - a[n - 1])}, g{abs(a[1] - b[0])}, h{abs(a[1] - b[n - 1])};
         loop(i, 0, n, 1){
-            if(e > b[i] - a[0])
+            if(e > b[i] - a[0]){
                 e = abs(b[i] - a[0]);
-            if (f > b[i] - a[n - 1])
+                r = i;
+            }
+            if (f > b[i] - a[n - 1]){
                 f = abs(b[i] - a[n - 1]);
-            if (g > a[i] - b[0])
+                s = i;
+            }
+            if (g > a[i] - b[0]){
                 g = abs(a[i] - b[0]);
-            if (h > a[i] - b[n - 1])
+                t = i;
+            }
+            if (h > a[i] - b[n - 1]){
                 h = abs(a[i] - b[n - 1]);
+                u = i;
+            }
         }
-        cost4 = e + f + g + h;
-        cout << min(cost4, min(cost3, cost1 + cost2)) << endl;
+        ll cost{e + f + g + h};
+        if (r == 0 && t == 0)
+            cost -= e;
+        if (s == n - 1 && u == n - 1)
+            cost -= f;
+        if (s == 0 && t == n - 1)
+            cost -= g;
+        if (u == 0 && r == n - 1)
+            cost -= h;
+        cout << cost;
     }
 }
