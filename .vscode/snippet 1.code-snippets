@@ -21,7 +21,7 @@
 		"prefix": "Basic_CPT",
 		"body": [
 			"#include <bits/stdc++.h>",
-			"#define ll long long int",
+			"#typedef long long int ll",
 			"#define loop(i,o,n,step) for(auto i{o}; i < n; i += step)",
 			"using namespace std;\n",
 			"int main(){",
