@@ -105,49 +105,93 @@
 //     }
 // }
 
+// #include <bits/stdc++.h>
+// #define ll long long int
+// #define loop(i,o,n,step) for(auto i{o}; i < n; i += step)
+// using namespace std;
+
+// int main(){
+//     int t{0};
+//     cin >> t;
+//     while(t--){
+//         int n{0};
+//         cin >> n;
+//         int a[n], b[n];
+//         loop(i, 0, n, 1) cin >> a[i];
+//         loop(i, 0, n, 1) cin >> b[i];
+//         int r{0}, s{0}, t{0}, u{0};
+//         ll e{abs(b[1] - a[0])}, f{abs(b[1] - a[n - 1])}, g{abs(a[1] - b[0])}, h{abs(a[1] - b[n - 1])};
+//         loop(i, 0, n, 1){
+//             if(e > b[i] - a[0]){
+//                 e = abs(b[i] - a[0]);
+//                 r = i;
+//             }
+//             if (f > b[i] - a[n - 1]){
+//                 f = abs(b[i] - a[n - 1]);
+//                 s = i;
+//             }
+//             if (g > a[i] - b[0]){
+//                 g = abs(a[i] - b[0]);
+//                 t = i;
+//             }
+//             if (h > a[i] - b[n - 1]){
+//                 h = abs(a[i] - b[n - 1]);
+//                 u = i;
+//             }
+//         }
+//         ll cost{e + f + g + h};
+//         if (r == 0 && t == 0)
+//             cost -= e;
+//         if (s == n - 1 && u == n - 1)
+//             cost -= f;
+//         if (s == 0 && t == n - 1)
+//             cost -= g;
+//         if (u == 0 && r == n - 1)
+//             cost -= h;
+//         cout << cost;
+//     }
+// }
+
 #include <bits/stdc++.h>
 #define ll long long int
 #define loop(i,o,n,step) for(auto i{o}; i < n; i += step)
 using namespace std;
 
 int main(){
-    int t{0};
+    int t;
     cin >> t;
     while(t--){
         int n{0};
         cin >> n;
-        int a[n], b[n];
-        loop(i, 0, n, 1) cin >> a[i];
-        loop(i, 0, n, 1) cin >> b[i];
-        int r{0}, s{0}, t{0}, u{0};
-        ll e{abs(b[1] - a[0])}, f{abs(b[1] - a[n - 1])}, g{abs(a[1] - b[0])}, h{abs(a[1] - b[n - 1])};
+        int arr[n], brr[n];
+        loop(i, 0, n, 1) cin >> arr[i];
+        loop(i, 0, n, 1) cin >> brr[i];
+        int a1{0}, an{0}, b1{0}, bn{0};
         loop(i, 0, n, 1){
-            if(e > b[i] - a[0]){
-                e = abs(b[i] - a[0]);
-                r = i;
-            }
-            if (f > b[i] - a[n - 1]){
-                f = abs(b[i] - a[n - 1]);
-                s = i;
-            }
-            if (g > a[i] - b[0]){
-                g = abs(a[i] - b[0]);
-                t = i;
-            }
-            if (h > a[i] - b[n - 1]){
-                h = abs(a[i] - b[n - 1]);
-                u = i;
-            }
+            if(abs(arr[0] - brr[i]) < abs(arr[0] - brr[a1]))
+                a1 = i;
         }
-        ll cost{e + f + g + h};
-        if (r == 0 && t == 0)
-            cost -= e;
-        if (s == n - 1 && u == n - 1)
-            cost -= f;
-        if (s == 0 && t == n - 1)
-            cost -= g;
-        if (u == 0 && r == n - 1)
-            cost -= h;
-        cout << cost;
+        loop(i, 0, n, 1){
+            if (abs(arr[n-1] - brr[i]) < abs(arr[n-1] - brr[an]))
+                an = i;
+        }
+        loop(i, 0, n, 1){
+            if (abs(brr[0] - arr[i]) < abs(brr[0] - arr[b1]))
+                b1 = i;
+        }
+        loop(i, 0, n, 1){
+            if (abs(brr[n-1] - arr[i]) < abs(brr[n-1] - arr[bn]))
+                bn = i;
+        }
+        ll cost = abs(arr[0] - brr[a1]) + abs(arr[n-1] - brr[a1]) + abs(brr[0] - arr[b1]) + abs(brr[n-1] - arr[bn]);
+        if(a1 == 0 && b1 == 0)
+            cost -= abs(arr[0] - brr[0]);
+        if(a1 == n - 1 && bn == 0)
+            cost -= abs(arr[0] - brr[n - 1]);
+        if(an == 0 && b1 == n - 1)
+            cost -= abs(arr[n - 1] - brr[0]);
+        if(an == n - 1 && bn == n - 1)
+            cost -= abs(arr[n - 1] - brr[n - 1]);
+        cout << cost << "\n";
     }
 }
