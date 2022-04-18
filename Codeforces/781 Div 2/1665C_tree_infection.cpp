@@ -20,9 +20,13 @@ int main(){
             brr[arr[i]]++;
         }
         int count{s.size()};
-        int mx{brr[0]};
-        loop(i, 0, n + 1, 1) mx = max(mx, brr[i]);
-        count += max(0, (mx - count + 1) / 2);
+        sort(brr, brr + n + 1, greater<int>());
+        loop(i,0,n+1,1){
+            count += max(0, (brr[i] - count - i + 1) / 2);
+        }
+        // int mx{brr[0]};
+        // loop(i, 0, n + 1, 1) mx = max(mx, brr[i]);
+        // count += max(0, (mx - count + 1) / 2);
         cout << count << "\n";
     }
 }
