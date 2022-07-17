@@ -8,22 +8,22 @@
 using namespace std;
 
 int main(){
-    int t;
+    ll t;
     cin >> t;
     while (t--){
-        int n, m;
+        ll n, m;
         cin >> n >> m;
-        int arr[n]{};
+        ll arr[n]{};
         loop(i, 0, m, 1){
-            int tmp;
+            ll tmp;
             cin >> tmp;
             arr[tmp - 1]++;
         }
         sort(arr, arr + n);
-        int l{arr[0]}, r{arr[n - 1]}, best{arr[n - 1]};
+        ll l{arr[0]}, r{arr[n - 1]}, best{arr[n - 1]};
         while (l <= r){
-            int mid = l + (r - l) / 2;
-            int a{0}, b{0};
+            ll mid = l + (r - l) / 2;
+            ll a{0}, b{0};
             loop(i, 0, n, 1){
                 if (arr[i] < mid){
                     a += (mid - arr[i]) / 2;
