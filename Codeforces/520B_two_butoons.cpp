@@ -1,28 +1,26 @@
 #include <bits/stdc++.h>
 #define ll long long int
 #define loop(i,o,n,step) for(auto i{o}; i < n; i += step)
+#define FAST ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 using namespace std;
 
 int main(){
     int n, m;
     cin >> n >> m;
-    if(n >= m){
-        cout << n - m;
-        return 0;
+    int dp[20007]{};
+    loop(i,0,n+1,1) dp[i] = n - i;
+    while(n < 20007){
+        int ctrl{n};
+        if(2 * n < 20007){
+            dp[2 * n] = dp[n] + 1;
+            n = n << 1;
+        }
+        else n = 20004; 
+        while(--n > ctrl){
+            if(n&1) dp[n] = dp[n+1] + 1;
+            else dp[n] = min(dp[n+1] + 1, dp[n/2] + 1);
+        }
+        n = n << 1;
     }
-    int y = m;
-    while(1){
-        if(m & 1)
-            break;
-        else if(m < n)
-            break;
-        m /= 2;
-    }
-    if(m > n){
-        int x = int(ceil(log2(m / n)));
-        cout << x + n * pow(2, x) - m + int(log2(y / m));
-        return 0;
-    }
-    cout << n - m + int(log2(y / m));
-    return 0;
+    cout << dp[m] << "\n";
 }

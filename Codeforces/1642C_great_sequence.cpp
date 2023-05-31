@@ -1,25 +1,35 @@
 #include <bits/stdc++.h>
 #define ll long long int
 #define loop(i,o,n,step) for(auto i{o}; i < n; i += step)
+#define FAST ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 using namespace std;
 
-//1 2 3 4 5 6 7 8 9
-//    |     |
-//1 2 4 5 7 8 9
-//    |   |
-
 int main(){
-    int t{0};
+    FAST
+    ll t;
     cin >> t;
     while(t--){
-        int n{0}, x, count{0};
+        ll n, x;
         cin >> n >> x;
-        int arr[n];
-        map<ll, int> m;
-        loop(i, 0, n, 1){
-            cin >> arr[i];
-            
+        map<ll, ll> m;
+        loop(i,0,n,1){
+            ll tmp;
+            cin >> tmp;
+            m[tmp]++;
         }
+        ll count{0};
+        for(auto &i: m){
+            if(i.second > 0){
+                if(m.count(x * i.first)){
+                    ll sub = min(m[x * i.first], i.second);
+                    m[x * i.first] -= sub;
+                    i.second -= sub;
+                    count += i.second;
+                }
+                else
+                    count += i.second;
+            }
+        }
+        cout << count << "\n";
     }
-    return 0;
 }
